@@ -1,0 +1,15 @@
+private float GetVolume()
+    {
+        float[] data = new float[256];
+        float a = 0;
+        _audioSource.GetOutputData(data, 0);
+
+        foreach (float s in data)
+        {
+            a += s * s;
+        }
+        float rms = Mathf.Sqrt(a / data.Length);
+        float db = 20 * Mathf.Log10(rms / 0.1f);
+
+        return db;
+    }
